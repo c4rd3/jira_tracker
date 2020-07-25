@@ -1,0 +1,69 @@
+html, body {
+    width: 100px;
+  }
+  
+  .hidden {
+    display: none;
+  }
+
+  .header {
+      border-bottom: solid #999999 1px;
+  }
+
+  .title {
+      width: 60%;
+      display: inline-block;
+  }
+
+  .options {
+      width: 20%;
+      float: right;
+      background-color: white;
+      border: solid 1px #999999;
+      border-radius: 10px;
+  }
+
+  .options:hover {
+      background-color: #999999;
+  }
+  
+  .button {
+    margin: 3% auto;
+    padding: 4px;
+    text-align: center;
+    font-size: 1em;
+    cursor: pointer;
+  }
+  
+  .add:hover {
+    background-color: #bbbbbb;
+  }
+  
+  .add {
+    background-color: #999999;
+  }
+  
+  .popup-content {
+    width: 500px;
+  }
+
+  .new-issue {
+    padding: 6px 17px;
+  }
+
+  input {
+      width: 100%;
+      padding: 6px;
+      border: solid #999999 1px;;
+
+  }
+
+.delete {
+    background-color: white;
+    border: solid 1px #999999;
+    border-radius: 10px;
+}
+
+.delete:hover {
+    background-color: #999999;
+}
