@@ -1,62 +1,62 @@
 html, body {
-    width: 100px;
-  }
+    padding-right: 16px;
+}
   
-  .hidden {
+.hidden {
     display: none;
-  }
+}
 
-  .header {
-      border-bottom: solid #999999 1px;
-  }
+.header {
+    border-bottom: solid #999999 1px;
+}
 
-  .title {
-      width: 60%;
-      display: inline-block;
-  }
+.title {
+    width: 60%;
+    display: inline-block;
+}
 
-  .options {
-      width: 20%;
-      float: right;
-      background-color: white;
-      border: solid 1px #999999;
-      border-radius: 10px;
-  }
+.options {
+    width: 20%;
+    float: right;
+    background-color: white;
+    border: solid 1px #999999;
+    border-radius: 10px;
+}
 
-  .options:hover {
-      background-color: #999999;
-  }
+.options:hover {
+    background-color: #999999;
+}
   
-  .button {
+.button {
     margin: 3% auto;
     padding: 4px;
     text-align: center;
     font-size: 1em;
     cursor: pointer;
-  }
+}
   
-  .add:hover {
+.add:hover {
     background-color: #bbbbbb;
-  }
+}
   
-  .add {
+.add {
     background-color: #999999;
-  }
+}
   
-  .popup-content {
+.popup-content {
     width: 500px;
-  }
+}
 
-  .new-issue {
+.new-issue {
     padding: 6px 17px;
-  }
+}
 
-  input {
-      width: 100%;
-      padding: 6px;
-      border: solid #999999 1px;;
+input {
+    width: 100%;
+    padding: 6px;
+    border: solid #999999 1px;;
 
-  }
+}
 
 .delete {
     background-color: white;
