@@ -9,6 +9,11 @@ function onError(error) {
     console.log(error);
 }
 
+function onErrorGettingIssue(error) {
+    console.log("Error: can't retrive data from server.");
+    console.log(error);
+}
+
 /* display previously-saved stored issues on startup */
 initialize();
 
@@ -17,72 +22,102 @@ function initialize() {
     var gettingAllStorageItems = browser.storage.local.get(null);
     
     /** Display every issue found */
-    gettingAllStorageItems.then((results) => {
-        var issuesKeys = Object.keys(results);
+    gettingAllStorageItems.then((issues) => {
+
+        var issuesKeys = Object.keys(issues);
         for (let issueKey of issuesKeys) {
-            var summary = results[issueKey]['summary'];
-            var status = results[issueKey]['status'];
-            displayIssue(issueKey, summary, status);
+            
+            var gettingIssue = getIssue(issueKey);
+            gettingIssue.then(data => {
+                /** Save local copy of the issue */
+                var storingIssue = browser.storage.local.set({ [data['key']] : data });
+                storingIssue.then(()=> {
+                    /** Show issue in the DOM */
+                    displayIssue(data['key'], data['fields']['summary'], data['fields']['status']['name']);    
+                }, onError);
+            })
         }
     }, onError);
 }
 
+
 function addIssue() {  
-    /** Recover issue ID */
-    var issueID = inputIssue.value;
-    
-    /** Save issue*/
-    let storeIssue = {}
-    storeIssue[issueID] = {}
-    storeIssue[issueID]['summary'] = 'ey que pasa';
-    storeIssue[issueID]['status'] = 'blocked';
-    var storingIssue = browser.storage.local.set(storeIssue);
-    
-    /** Show new issue */
-    storingIssue.then(()=> {
-        displayIssue(issueID, 'descrip', 'prueba');    
-    }, onError);
-    getIssue();
+    var issueID = inputIssue.value.toUpperCase();
+
+    /** Load local issues */
+    var gettingAllStorageItems = browser.storage.local.get(null);
+
+    gettingAllStorageItems.then(issues => {
+       
+        /** Checks for duplicates */
+        var issuesKeys = Object.keys(issues);
+        if (issuesKeys.includes(issueID)){
+            
+            console.log("Already on the list!")
+
+        }else {
+            
+            /** Download remote issue details */
+            let gettingIssue = getIssue(issueID);
+            gettingIssue.then(data => {
+            
+                /** Save local copy of the issue */
+                var storingIssue = browser.storage.local.set({ [data['key']] : data });
+
+                storingIssue.then(()=> {
+
+                    /** Show issue in the DOM */
+                    displayIssue(data['key'], data['fields']['summary'], data['fields']['status']['name']);    
+                }, onError);
+
+            }, onErrorGettingIssue);
+        }
+    });
 }
  
-function getIssue() {
-    fetch('https://run.mocky.io/v3/6bd7b6bb-afb9-4770-9e4f-b577a2494ae9')
+function getIssue(issue) {
+    console.log("Call get Issue");
+    return fetch('https://run.mocky.io/v3/70c2d51c-73a9-4159-9f7f-d74bb88d6cf0')
     .then(response => response.json())
-    .then(function(data){
-        console.log(data);
-        console.log(data.fields['sub-tasks'][0]['outwardIssue']['fields']['status']['name']);
-        console.log(data.self);
-    });
+    .then(data => data);
 }
 
 function displayIssue(issue, summary, status) {
 
-    /** Crear DOM elements */
-    var issueContainer = document.createElement('div');
-    var issueID = document.createElement('div');
-    var issueSummary = document.createElement('div');
-    var issueStatus = document.createElement('div');
+    /** Create DOM elements */
+    var issueContainer = document.createElement('tr');
+    var issueID = document.createElement('td');
+    var issueURL = document.createElement('a');
+    var issueSummary = document.createElement('td');
+    var issueStatus = document.createElement('td');
+    var buttonTd = document.createElement('td');
     var deleteBtn = document.createElement('button');
 
     /** Fill elements with data */
-    issueID.textContent = issue;
+    issueURL.textContent = issue;
     issueSummary.textContent = summary;
     issueStatus.textContent = status;
+    issueURL.setAttribute('href', 'https://google.com');
+    issueContainer.setAttribute('class', 'issueContainer');
+    issueID.setAttribute('class', 'issueID');
+    issueSummary.setAttribute('class', 'issueSummary');
+    issueStatus.setAttribute('class', 'issueStatus');
     deleteBtn.setAttribute('class', 'button delete');
-    deleteBtn.textContent = 'remove';
+    deleteBtn.textContent = 'Delete';
 
     /** Build issue node */
+    issueID.appendChild(issueURL);
     issueContainer.appendChild(issueID);
     issueContainer.appendChild(issueSummary);
     issueContainer.appendChild(issueStatus);
-    issueContainer.appendChild(deleteBtn);
-      
+    issueContainer.appendChild(buttonTd);
+    buttonTd.appendChild(deleteBtn);
     issues.appendChild(issueContainer); 
 
     /** Bind delete on click event */
     deleteBtn.addEventListener('click',(e) => {
         const evtTgt = e.target;
-        evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
+        evtTgt.parentNode.parentNode.parentNode.removeChild(evtTgt.parentNode.parentNode);
         browser.storage.local.remove(issue);
     })
 }

@@ -1,5 +1,6 @@
 html, body {
     padding-right: 16px;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
 }
   
 .hidden {
@@ -20,7 +21,7 @@ html, body {
     float: right;
     background-color: white;
     border: solid 1px #999999;
-    border-radius: 10px;
+    border-radius: 2px;
 }
 
 .options:hover {
@@ -28,7 +29,6 @@ html, body {
 }
   
 .button {
-    margin: 3% auto;
     padding: 4px;
     text-align: center;
     font-size: 1em;
@@ -42,11 +42,11 @@ html, body {
 .add {
     background-color: #999999;
 }
-  
-.popup-content {
-    width: 500px;
-}
 
+.issues {
+    width: 800px;
+}
+  
 .new-issue {
     padding: 6px 17px;
 }
@@ -54,16 +54,23 @@ html, body {
 input {
     width: 100%;
     padding: 6px;
+    margin-top: 10px;
     border: solid #999999 1px;;
-
 }
 
 .delete {
-    background-color: white;
+    float: left;
+    color: #d70022;
+    background-color: #ffffff;
     border: solid 1px #999999;
-    border-radius: 10px;
+    border-radius: 3px;
 }
 
 .delete:hover {
-    background-color: #999999;
+    color: #ffffff;
+    background-color: #d70022;
+}
+
+.issueID {    
+    width: 140px;
 }
