@@ -8,22 +8,35 @@
   <body>
         <form>
 
+            <h1>General data</h1>
+            <p>
+                Specify the jira host. <br> E.g. https://jira.mycompany.com
+            </p>
+
             <table>
                 <tr>
-                    <td><label>Jira host</label></td>
-                    <td><input type="text" id="host"/></td>
+                    <td><label>Jira host:</label>
+                    <td><input type="text" id="host"></td>
                 </tr>
+            </table>
+
+            <h1>Authentication and Authorization</h1>
+            <p>
+                API Tokens are recomended when using Jira Cloud instances.
+            </p>
+            
+            <table> 
                 <tr>
                     <td><label>User:</label></td>
                     <td><input type="text" id="user"/></td>
                 </tr>
+                
                 <tr>
-                    <td><label>Password:</label></td>
-                    <td><input type="password" id="colour"/></td>
+                    <td><label>Password / API Token:</label></td>
+                    <td><input type="password" id="password"/></td>
                 </tr>
                 <tr>
                     <td><button type="submit">Save</button></td>
-                    
                 </tr>
             </table>
                  
