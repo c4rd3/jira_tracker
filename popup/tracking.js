@@ -2,8 +2,15 @@
 var inputIssue = document.querySelector('.text-issue');
 var addBtn = document.querySelector('.add');
 var issues = document.querySelector('.issues');
+var options = document.querySelector('.options');
+
+options.addEventListener('click', openOptions);
 
 addBtn.addEventListener('click', addIssue);
+
+function openOptions() {
+    browser.runtime.openOptionsPage();
+}
 
 function onError(error) {
     console.log(error);

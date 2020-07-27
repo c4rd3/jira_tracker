@@ -28,6 +28,11 @@
         "default_popup": "popup/tracking.html"
     },
 
+    "options_ui": {
+        "page": "options/options.html",
+        "browser_style": true
+      },
+
     "permissions": [
         "storage",
         "webRequest"
