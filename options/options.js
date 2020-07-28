@@ -8,7 +8,7 @@ function onError(error){
 	console.log(error);
 }
 
-function saveOptions() {
+function saveOptions(e) {
 
 	/** Read data from input form */
 	var optionsValues = {};

@@ -5,7 +5,6 @@ var issues = document.querySelector('.issues');
 var options = document.querySelector('.options');
 
 options.addEventListener('click', openOptions);
-
 addBtn.addEventListener('click', addIssue);
 
 function openOptions() {
@@ -19,6 +18,10 @@ function onError(error) {
 function onErrorGettingIssue(error) {
     console.log("Error: can't retrive data from server.");
     console.log(error);
+}
+
+function onErrorUpdatingIssues(){
+    console.log("Error: can't retrive data from server.");
 }
 
 /* display previously-saved stored issues on startup */
@@ -41,8 +44,9 @@ function initialize() {
                 storingIssue.then(()=> {
                     /** Show issue in the DOM */
                     displayIssue(data['key'], data['fields']['summary'], data['fields']['status']['name']);    
-                }, onError);
+                }, onErrorUpdatingIssues);
             })
+            .catch(error => { console.log('error!')  });
         }
     }, onError);
 }
@@ -83,10 +87,22 @@ function addIssue() {
 }
  
 function getIssue(issue) {
-    console.log("Call get Issue");
-    return fetch('https://run.mocky.io/v3/70c2d51c-73a9-4159-9f7f-d74bb88d6cf0')
-    .then(response => response.json())
-    .then(data => data);
+    
+    var gettingOptions = browser.storage.local.get(null);
+    var options = {};
+
+    return gettingOptions
+    .then(data => {
+        return fetch(data.options['host']+"/rest/api/2/issue/"+issue+"?fields=status,summary,description,assignee", {
+            headers: { authorization: window.btoa(data.options['user']+":"+data.options['password'])}
+        })
+        //return fetch('https://run.mocky.io/v3/70c2d51c-73a9-4159-9f7f-d74bb88d6cf0')
+        .then(response => response.json())
+        .then(data => data);
+    })
+    .catch(error => {
+        console.log('Error de RED!');
+    });
 }
 
 function displayIssue(issue, summary, status) {
