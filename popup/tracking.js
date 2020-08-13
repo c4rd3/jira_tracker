@@ -94,7 +94,9 @@ function getIssue(issue) {
     return gettingOptions
     .then(data => {
         return fetch(data.options['host']+"/rest/api/2/issue/"+issue+"?fields=status,summary,description,assignee", {
-            headers: { authorization: window.btoa(data.options['user']+":"+data.options['password'])}
+            headers: { 
+                authorization: window.btoa(data.options['user']+":"+data.options['password'])
+            }
         })
         //return fetch('https://run.mocky.io/v3/70c2d51c-73a9-4159-9f7f-d74bb88d6cf0')
         .then(response => response.json())
