@@ -43,7 +43,7 @@ html, body {
 }
 
 .issues {
-    width: 800px;
+    width: 780px;
 }
   
 .new-issue {
@@ -72,4 +72,9 @@ input {
 
 .issueID {    
     width: 140px;
+}
+
+
+.done {    
+    color: green;
 }

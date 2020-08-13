@@ -63,9 +63,7 @@ function addIssue() {
         /** Checks for duplicates */
         var issuesKeys = Object.keys(issues);
         if (issuesKeys.includes(issueID)){
-            
             console.log("Already on the list!")
-
         }else {
             
             /** Download remote issue details */
@@ -87,9 +85,7 @@ function addIssue() {
 }
  
 function getIssue(issue) {
-    
     var gettingOptions = browser.storage.local.get(null);
-    var options = {};
 
     return gettingOptions
     .then(data => {
@@ -98,7 +94,6 @@ function getIssue(issue) {
                 authorization: window.btoa(data.options['user']+":"+data.options['password'])
             }
         })
-        //return fetch('https://run.mocky.io/v3/70c2d51c-73a9-4159-9f7f-d74bb88d6cf0')
         .then(response => response.json())
         .then(data => data);
     })
@@ -129,6 +124,18 @@ function displayIssue(issue, summary, status) {
     issueStatus.setAttribute('class', 'issueStatus');
     deleteBtn.setAttribute('class', 'button delete');
     deleteBtn.textContent = 'Delete';
+
+    /** Status styles */
+    status == "Done" ? issueStatus.setAttribute('class', 'done') : issueStatus.setAttribute('class', 'pending');
+
+    var gettingOptions = browser.storage.local.get(null);
+
+    gettingOptions.then(data => {
+        issueURL.href = data.options['host']+"/browse/"+issue;
+    })
+    .catch(error => {
+        console.log('Error de RED!');
+    });
 
     /** Build issue node */
     issueID.appendChild(issueURL);
