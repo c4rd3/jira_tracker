@@ -17,6 +17,7 @@ html, body {
 }
 
 .options {
+    margin-top: 10px;
     float: right;
     background-color: white;
     border: solid 1px #999999;
@@ -40,6 +41,8 @@ html, body {
   
 .add {
     background-color: #999999;
+    width: 15%;
+    margin-top: 5px;
 }
 
 .issues {
@@ -51,7 +54,7 @@ html, body {
 }
 
 input {
-    width: 100%;
+    width: 70%;
     padding: 6px;
     margin-top: 10px;
     border: solid #999999 1px;;
@@ -63,6 +66,7 @@ input {
     background-color: #ffffff;
     border: solid 1px #999999;
     border-radius: 3px;
+    font-size: 0.7em;
 }
 
 .delete:hover {
@@ -74,7 +78,14 @@ input {
     width: 140px;
 }
 
-
 .done {    
     color: green;
+}
+
+.no-done {
+    color:#eb9834;
+}
+
+.new-issue{
+    border-top: solid 1px #999999;
 }
