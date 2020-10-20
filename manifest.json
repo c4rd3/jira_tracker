@@ -7,13 +7,13 @@
     "homepage_url": "https://github.com/c4rd3/jira_tracker",
   
     "icons": {
-      "48": "icons/border-48.png"
+      "48": "icons/icon.png"
     },
   
     "browser_action": {
         "default_icon": {
-          "19": "icons/border-19.png",
-          "38": "icons/border-38.png"
+          "19": "icons/icon.png",
+          "38": "icons/icon.png"
         },
 
         "default_title": "tracking",
